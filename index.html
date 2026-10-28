@@ -4,9 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="projeto-poligrafo/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <title>Polígrafo</title>
 </head>
 <body>
-    
+    <div class="titulos">
+        <h1 class="titulo1">O</h1>
+        <h1 class="titulo">MENTALISTA</h1>
+    </div>
+    <div class="formulario">
+        <div class="forms">
+    <!-- TELA INICIAL -->
+    <section id="inicio">
+        <h1>Formulário Dinâmico</h1>
+        <p>Clique no botão para começar.</p>
+
+        <button id="botaoIniciar">Iniciar</button>
+    </section>
+
+    <!-- PERGUNTAS -->
+    <section id="formulario" hidden>
+        <p id="contador"></p>
+
+        <h2 id="pergunta"></h2>
+
+        <button id="botaoSim">Sim</button>
+        <button id="botaoNao">Não</button>
+
+        <button id="botaoProximo" disabled>
+            Próxima pergunta
+        </button>
+    </section>
+
+    <!-- TELA FINAL -->
+    <section id="resultado" hidden>
+        <h2>Formulário concluído!</h2>
+        <p id="resumo"></p>
+    </section>
+        </div>
+    </div>
+
+    <script src="/projeto-poligrafo/script.js"></script>
 </body>
 </html>
