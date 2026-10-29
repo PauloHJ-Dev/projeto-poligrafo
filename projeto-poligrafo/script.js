@@ -110,6 +110,7 @@
 // }
 
 
+
 const perguntas = [
     "Você costuma guardar segredos?",
     "Você já mentiu para evitar problemas?",
@@ -119,9 +120,8 @@ const perguntas = [
 const respostas = [];
 
 let indiceAtual = 0;
-let respostaSelecionada = null;
 
-// 1. Selecionar os elementos do HTML
+// Selecionar os elementos do HTML
 const inicio = document.getElementById("inicio");
 const formulario = document.getElementById("formulario");
 const resultado = document.getElementById("resultado");
@@ -131,11 +131,13 @@ const pergunta = document.getElementById("pergunta");
 const resumo = document.getElementById("resumo");
 
 const botaoIniciar = document.getElementById("botaoIniciar");
-const botaoSim = document.getElementById("botaoSim");
-const botaoNao = document.getElementById("botaoNao");
 const botaoProximo = document.getElementById("botaoProximo");
 
-// 2. Iniciar o formulário
+const opcoesResposta = document.querySelectorAll(
+    'input[name="resposta"]'
+);
+
+// Iniciar o formulário
 botaoIniciar.addEventListener("click", iniciarFormulario);
 
 function iniciarFormulario() {
@@ -148,50 +150,56 @@ function iniciarFormulario() {
     mostrarPergunta();
 }
 
-// 3. Exibir a pergunta atual
+// Exibir a pergunta atual
 function mostrarPergunta() {
-    respostaSelecionada = null;
-
     pergunta.textContent = perguntas[indiceAtual];
 
     contador.textContent =
         `Pergunta ${indiceAtual + 1} de ${perguntas.length}`;
 
+    // Desmarcar as opções da pergunta anterior
+    opcoesResposta.forEach(function (opcao) {
+        opcao.checked = false;
+    });
+
+    // Desabilitar o botão até escolher uma resposta
     botaoProximo.disabled = true;
 
+    // Alterar o texto do botão na última pergunta
     botaoProximo.textContent =
         indiceAtual === perguntas.length - 1
             ? "Finalizar"
             : "Próxima pergunta";
 }
 
-// 4. Registrar a opção escolhida
-botaoSim.addEventListener("click", function () {
-    selecionarResposta("Sim");
+// Detectar quando uma opção for selecionada
+opcoesResposta.forEach(function (opcao) {
+    opcao.addEventListener("change", function () {
+        botaoProximo.disabled = false;
+    });
 });
 
-botaoNao.addEventListener("click", function () {
-    selecionarResposta("Não");
-});
-
-function selecionarResposta(resposta) {
-    respostaSelecionada = resposta;
-    botaoProximo.disabled = false;
-}
-
-// AVANÇAR PARA A PRÓXIMA PERGUNTA
+// Avançar para a próxima pergunta
 botaoProximo.addEventListener("click", proximaPergunta);
 
 function proximaPergunta() {
-    if (respostaSelecionada === null) {
+    // Encontrar a opção selecionada
+    const opcaoSelecionada = document.querySelector(
+        'input[name="resposta"]:checked'
+    );
+
+    // Impedir avanço sem resposta
+    if (!opcaoSelecionada) {
         return;
     }
 
+    // Armazenar a pergunta e a resposta
     respostas.push({
         pergunta: perguntas[indiceAtual],
-        resposta: respostaSelecionada
+        resposta: opcaoSelecionada.value
     });
 
+    // Verificar se ainda existem perguntas
     if (indiceAtual < perguntas.length - 1) {
         indiceAtual++;
         mostrarPergunta();
@@ -200,15 +208,17 @@ function proximaPergunta() {
     }
 }
 
-// EXIBE O RESULTADO FINAL
+// Exibir o resultado final
 function finalizarFormulario() {
     formulario.hidden = true;
     resultado.hidden = false;
 
+    // Contar as respostas Sim
     const totalSim = respostas.filter(
         item => item.resposta === "Sim"
     ).length;
 
+    // Contar as respostas Não
     const totalNao = respostas.filter(
         item => item.resposta === "Não"
     ).length;
@@ -216,6 +226,7 @@ function finalizarFormulario() {
     resumo.textContent =
         `Sim: ${totalSim} | Não: ${totalNao}`;
 
+    // Mostrar todas as respostas no console
     console.log(respostas);
 }
 
