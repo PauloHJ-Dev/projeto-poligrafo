@@ -112,9 +112,16 @@
 
 
 const perguntas = [
-    "Você costuma guardar segredos?",
-    "Você já mentiu para evitar problemas?",
-    "Você se considera uma pessoa observadora?"
+    "Você conhece a vítima ou alguma pessoa diretamente envolvida no caso?",
+    "Você esteve no local onde o ocorrido aconteceu?",
+    "Você tinha conhecimento de que algo poderia acontecer?",
+    "Você teve algum contato com provas ou evidências relacionadas ao caso?",
+    "Você sabe de algo que poderia mudar o rumo desta investigação?",
+    "Alguém pediu sua ajuda para realizar alguma ação relacionada ao caso?",
+    "Você tem conhecimento de alguma pessoa que esteja envolvida no caso e ainda não tenha sido investigada?",
+    "Você possui algum motivo pessoal para querer prejudicar alguém envolvido no caso?",
+    "Você acredita que a pessoa responsável pelo ocorrido está entre os suspeitos já identificados?",
+    "Você conseguiria provar sua inocência diante de todas as evidências apresentadas?"
 ];
 
 const respostas = [];
@@ -168,7 +175,7 @@ function mostrarPergunta() {
     // Alterar o texto do botão na última pergunta
     botaoProximo.textContent =
         indiceAtual === perguntas.length - 1
-            ? "Finalizar"
+            ? "Finalizar teste"
             : "Próxima pergunta";
 }
 
@@ -223,12 +230,44 @@ function finalizarFormulario() {
         item => item.resposta === "Não"
     ).length;
 
-    resumo.textContent =
-        `Sim: ${totalSim} | Não: ${totalNao}`;
+    resumo.innerHTML =
+        `Sim:  <span style="color: red;"> ${totalSim}</span> | Não: ${totalNao}`;
 
-    // Mostrar todas as respostas no console
-    console.log(respostas);
+    let classificacao = "";
+    let descricao = "";
+    let cor = "";
+
+// Classificar com base no número de respostas Sim
+if (totalSim < 5) {
+     classificacao = "Inocente";
+     descricao = "As evidências apresentadas não indicam envolvimento significativo na ocorrência.";
+     cor = "green";
+}else if (totalSim ===5){
+     classificacao = "Suspeito(a)";
+     descricao = "Foram encontrados indícios que justificam investigação adicional";  
+     cor = "yellow";
+}else if (totalSim >= 6 && totalSim <= 8) {
+     classificacao = "Cúmplice";
+     descricao = "A quantidade de evidências sugere possível participação indireta no crime";
+     cor = "orange";
+}else if (totalSim >= 9 && totalSim <= 10) {
+     classificacao = "Culpado(a)";
+     descricao = "As evidências indicam envolvimento direto e significativo na ocorrência.";
+     cor = "red";
 }
+
+ document.getElementById("classificacao").innerHTML = ` <span style="color: ${cor};"> ${classificacao}</span> `;
+ document.getElementById('descricao').textContent = descricao;
+}
+// Reiniciar teste
+function refazerTeste() { 
+    indiceAtual = 0;
+    respostas.length = 0;
+    resultado.hidden = true;
+    formulario.hidden = false;
+    mostrarPergunta();
+}
+
 
 
 

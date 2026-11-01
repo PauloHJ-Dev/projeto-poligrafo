@@ -33,12 +33,12 @@ body {
 .titulo{
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
-    font-size: 40px;
+    font-size: 48px;
     text-align: center;
     max-width: 350px;
     border: 3px solid rgb(186, 46, 18);
-    padding: 1px 3px;
-    margin: 20px;
+    padding: 3px 11px;
+    margin: 27px;
 }
 .formulario{
   margin-top: 90px;
@@ -56,4 +56,104 @@ body {
     display: flex;
     justify-content: center; 
     align-items: center;
+    font-size: 17px ;
+    font-weight: 600 ;
+    text-align: center;
+    line-height: 2.5;
+    
+}
+.aviso{
+   font-family: italic;
+   font-style:italic;
+   color: #ffffffe2;
+   max-width: 500px;
+    line-height: 1.5;
+    font-weight: 10;
+    margin: 5px auto;
+    margin-bottom: 30px;
+    overflow-wrap: break-word;
+}
+.pergunta{
+  font-family: 'Playfair Display', sans-serif;
+  max-width: 500px;
+  font-size: 25px;
+    line-height: 1.5;
+    font-weight: 550;
+    margin: 5px auto;
+    margin-bottom: 30px;
+    overflow-wrap: break-word;
+}
+.opcao-resposta {
+    width: 20px;
+    height: 20px;
+    accent-color: #BA2E12;
+    cursor: pointer;
+}
+    .opcoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+.botao {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #BA2E12;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 20px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.botao:hover {
+  background-color:  #82200c;
+}
+.classificacao{
+  display: flex;
+  justify-content: center; /* Centraliza na horizontal */
+  align-items: center;    /* Centraliza na vertical */
+  gap: 10px;
+}
+#descricao {
+    max-width: 500px;
+    line-height: 1.5;
+    font-weight: 300;
+    margin: 5px auto;
+    margin-bottom: 30px;
+    overflow-wrap: break-word;
+    color: #ffffffe7;
+}
+.refazer{
+  font-family: 'Montserrat', sans-serif;
+    background-color: #BA2E12;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 20px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.refazer:hover {
+  background-color:  #82200c;
+  }
+.voltar{
+  font-family: 'Montserrat', sans-serif;
+    background-color: #03080B;
+    border: 1px solid #343B40;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 20px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.voltar:hover {
+  background-color:  #343B40;
 }
